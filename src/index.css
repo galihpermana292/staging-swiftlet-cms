@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.heading-table-text {
+		@apply text-[30px] font-bold;
+	}
+	.button-black {
+		@apply bg-black text-white;
+	}
+	.button-border-black {
+		@apply border-[1px] border-black;
+	}
+}
