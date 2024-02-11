@@ -6,7 +6,6 @@ import AddModal from './presentation/Modal/ModalAdd';
 import { useForm } from 'antd/es/form/Form';
 import useMutateCreateRoles from '../repositories/useMutateCreateRoles';
 import useQueryRolesDetail from '../repositories/useQueryRolesDetail';
-import UseGenerateColumns from '../usecase/useGenerateColumns';
 import LoadingBoundary from '../../shared/view/LoadingBoundary/LoadingBoundary';
 import ErrorBoundary from '../../shared/view/ErrorBoundary/ErrorBoundary';
 import { AxiosError } from 'axios';
@@ -15,6 +14,7 @@ import useMutateDeleteRoles from '../repositories/useMutateDeleteRoles';
 import { Button, Input } from 'antd';
 import SwiftletTable from '../../shared/view/Table/SwiftletTable';
 import { Role } from '../../../api/interfaces';
+import UseGenerateColumns from '../usecase/useGenerateColumns';
 
 const RolesContainer = () => {
 	const [form] = useForm();
