@@ -1,6 +1,4 @@
-import { RootPermissionsListI } from '../intefaces';
-
-export const permissionsList: RootPermissionsListI[] = [
+export const permissionsList: any[] = [
 	{
 		title: 'Inbound',
 		value: 'inbound',

@@ -1,6 +1,9 @@
 import { AxiosError } from 'axios';
-import { RootErrorResponseI } from '../../../api/interfaces';
 import { message } from 'antd';
+
+export interface RootErrorResponseI {
+	message: string;
+}
 
 const useErrorAxios = () => {
 	const generateErrorMsg = (error: AxiosError) => {

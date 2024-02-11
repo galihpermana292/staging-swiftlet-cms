@@ -4,7 +4,7 @@ import useMutateLogin from '../repositories/useMutateLogin';
 
 const LoginContainer = () => {
 	const [form] = useForm();
-	const { mutate, isLoading } = useMutateLogin();
+	const { mutate } = useMutateLogin();
 	return (
 		<div className="flex justify-center items-center h-screen ">
 			<div className="w-[400px] p-[20px]">

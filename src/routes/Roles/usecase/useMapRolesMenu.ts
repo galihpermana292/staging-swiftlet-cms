@@ -1,12 +1,11 @@
 import { Menu, RootRolesDetailResponseI } from '../../../api/interfaces';
-import { RootPermissionsListI } from '../model/intefaces';
 
 const useMapRolesMenu = () => {
-	function mapMenuToTree(menuItems: Menu[]): RootPermissionsListI[] {
+	function mapMenuToTree(menuItems: Menu[]): any[] {
 		return menuItems.map((menuItem) => {
 			const value = menuItem.name.toLowerCase();
 			const id = menuItem.id;
-			const children: RootPermissionsListI[] = [
+			const children: any[] = [
 				{
 					title: `${value} manage`,
 					value: `${value}-${id}-manage`,

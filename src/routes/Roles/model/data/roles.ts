@@ -1,6 +1,4 @@
-import { RootRolesResponseI } from '../intefaces';
-
-export const dummyRolesData: RootRolesResponseI[] = [
+export const dummyRolesData: any[] = [
 	{
 		id: '1',
 		name: 'User1',
