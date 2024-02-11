@@ -12,8 +12,8 @@ const useQueryAdminsDetail = (
 			const data = await DashboardAdminsAPI.getDetailRoles(
 				modalState!.id as string
 			);
-
-			form!.setFieldsValue(data.admin);
+			const { role } = data.admin;
+			form!.setFieldsValue({ ...data.admin, role: role.id });
 			return data;
 		} catch (error) {
 			throw error;

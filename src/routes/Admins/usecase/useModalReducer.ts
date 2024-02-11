@@ -37,10 +37,12 @@ const initialState: ModalState = {
 	id: undefined,
 };
 
+export type ModalTypeT = 'edit' | 'add' | 'password';
+
 const UseModalReducer = (form?: FormInstance<any>): ModalReducerReturnI => {
 	const [modalState, dispatch] = useReducer(modalReducer, initialState);
 
-	const openModal = (modalType: 'edit' | 'add', id?: string) => {
+	const openModal = (modalType: ModalTypeT, id?: string) => {
 		if (modalType === 'add') form!.resetFields();
 		dispatch({ type: 'OPEN_MODAL', modalType, id });
 	};

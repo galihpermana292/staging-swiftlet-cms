@@ -1,10 +1,9 @@
 import { ColumnsType } from 'antd/es/table';
-import { Metadata, Role } from '../../../api/interfaces';
+import { Metadata } from '../../../api/interfaces';
 import React, { ReactNode } from 'react';
 
 export interface SwiftletTabelI {
 	columns: ColumnsType<any>;
-	// data?: Role[];
 	metadata?: Metadata;
 	onPaginationChanges: React.Dispatch<
 		React.SetStateAction<{

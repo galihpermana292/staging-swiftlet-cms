@@ -96,6 +96,63 @@ class DashboardAdminsServices extends ApiClass {
 			throw error;
 		}
 	}
+
+	public async editAdminsPassword(
+		payload: { password: string },
+		id: string
+	): Promise<RootGeneralResponseI> {
+		try {
+			const token = JSON.parse(localStorage.getItem('token')!);
+			const { data } = await this.axiosInstance.patch<RootGeneralResponseI>(
+				`/admins/${id}/password`,
+				payload,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return data;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async deactivateAdmins(id: string): Promise<RootGeneralResponseI> {
+		try {
+			const token = JSON.parse(localStorage.getItem('token')!);
+			const { data } = await this.axiosInstance.patch<RootGeneralResponseI>(
+				`/admins/${id}/deactivate`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return data;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async activateAdmins(id: string): Promise<RootGeneralResponseI> {
+		try {
+			const token = JSON.parse(localStorage.getItem('token')!);
+			const { data } = await this.axiosInstance.patch<RootGeneralResponseI>(
+				`/admins/${id}/reactivate`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return data;
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 
 export const DashboardAdminsAPI = new DashboardAdminsServices();

@@ -8,7 +8,7 @@ interface AddModalUserI {
 	modalState: ModalState;
 	submitModal: (value: any) => void;
 	form: FormInstance<any>;
-	loading: boolean;
+	loading?: boolean;
 	roleData: GeneralSelectI[];
 	warehouseData: GeneralSelectI[];
 }
@@ -19,16 +19,23 @@ const AddModal = ({
 	form,
 	roleData,
 	warehouseData,
-	loading,
 }: AddModalUserI) => {
+	const modalTitle =
+		modalState.type === 'add'
+			? 'Add Admin'
+			: modalState.type === 'edit'
+			? 'Edit Admin'
+			: 'Change Password';
+
 	return (
 		<div>
 			<Modal
-				title={modalState?.type === 'edit' ? 'Edit Admin' : 'Add Admins'}
+				title={modalTitle}
 				open={modalState?.isOpen}
 				footer={null}
 				onCancel={closeModal}>
 				<UserForm
+					modalState={modalState}
 					roleData={roleData}
 					warehouseData={warehouseData}
 					submitModal={submitModal}

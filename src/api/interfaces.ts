@@ -74,7 +74,7 @@ export interface RootAdminsPayloadI {
 
 export interface RootAdminsDetailResponseI {
 	trace_id: string;
-	admin: AdminWithRoleI[];
+	admin: AdminWithRoleI;
 	metadata?: Metadata;
 }
 
@@ -87,7 +87,9 @@ export interface RootAdminsDetailPayloadI {
  * Object
  */
 
-export interface AdminWithRoleI extends Role {}
+export interface AdminWithRoleI extends Admins {
+	role: Role;
+}
 
 export interface Admins {
 	id: string;

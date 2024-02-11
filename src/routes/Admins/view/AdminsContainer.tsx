@@ -11,13 +11,16 @@ import { AxiosError } from 'axios';
 import { Admins } from '../../../api/interfaces';
 import useQueryAdmins from '../repositories/useQueryAdmins';
 import UseGenerateColumnUser from '../usecase/useGenerateColumnsUser';
-import UseModalReducer from '../usecase/useModalReducer';
 import useQueryRoles from '../../Roles/repositories/useQueryRoles';
 import useMapSelectData from '../usecase/useMapSelectData';
 import { initialWarehouseSelectData } from '../model/data/dummyUsers';
-import useMutateCreateAdmins from '../usecase/useMutateCreateAdmins';
-import useQueryAdminsDetail from '../usecase/useQueryAdminsDetail';
-import useMutateDeleteAdmins from '../usecase/useMutateDeleteAdmins';
+import useMutateCreateAdmins from '../repositories/useMutateCreateAdmins';
+import useQueryAdminsDetail from '../repositories/useQueryAdminsDetail';
+import useMutateDeleteAdmins from '../repositories/useMutateDeleteAdmins';
+import useMutateEditAdmins from '../repositories/useMutateEditAdmins';
+import UseModalReducer from '../usecase/useModalReducer';
+import useMutateEditPasswordAdmins from '../repositories/useMutateEditAdminsPassword';
+import useMutateUpdateAdminsStatus from '../repositories/useMutateEditAdminsStatus';
 
 const AdminsContainer = () => {
 	const [form] = useForm();
@@ -45,8 +48,18 @@ const AdminsContainer = () => {
 	);
 
 	const { mutate: mutateDelete } = useMutateDeleteAdmins(refetch);
+	const { mutate: mutateEdit } = useMutateEditAdmins(closeModal, refetch);
+	const { mutate: mutatePassword } = useMutateEditPasswordAdmins(
+		closeModal,
+		refetch
+	);
+	const { mutate: mutateStatus } = useMutateUpdateAdminsStatus(refetch);
 
-	const { columns } = UseGenerateColumnUser(openModal, mutateDelete);
+	const { columns } = UseGenerateColumnUser(
+		openModal,
+		mutateDelete,
+		mutateStatus
+	);
 
 	return (
 		<LoadingBoundary loading={loadingGetAll || loadingGetDetail}>
@@ -54,10 +67,16 @@ const AdminsContainer = () => {
 				<div>
 					<AddModal
 						submitModal={(val) => {
-							if (modalState?.type == 'add') {
+							if (modalState?.type === 'add') {
 								return mutateCreate(val);
 							}
-							// mutateEdit({ payload: val, id: modalState?.id as string });
+							if (modalState?.type === 'password') {
+								return mutatePassword({
+									payload: val,
+									id: modalState?.id as string,
+								});
+							}
+							mutateEdit({ payload: val, id: modalState?.id as string });
 						}}
 						roleData={rolesSelectData}
 						warehouseData={warehouseSelectData}

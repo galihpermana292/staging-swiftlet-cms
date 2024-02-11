@@ -9,14 +9,13 @@ import {
 	TableProps,
 	Tag,
 } from 'antd';
-import UseGenerateButtonActions from './useGenerateButtonAction';
+import { ModalTypeT } from './useModalReducer';
 
 const UseGenerateColumnUser = (
-	onOpenModal?: (modalType: 'edit' | 'add', id?: string | undefined) => void,
-	onDelete?: any
+	onOpenModal?: (modalType: ModalTypeT, id?: string | undefined) => void,
+	onDelete?: any,
+	onChangeStatus?: any
 ) => {
-	const items = UseGenerateButtonActions({});
-
 	const columns: TableProps<any>['columns'] = [
 		{
 			title: 'Name',
@@ -52,7 +51,7 @@ const UseGenerateColumnUser = (
 			title: 'Actions',
 			dataIndex: '',
 			key: 'actions',
-			render: ({ id }) => (
+			render: ({ id, status }) => (
 				<Row gutter={[12, 12]}>
 					<Col>
 						<Button
@@ -74,7 +73,21 @@ const UseGenerateColumnUser = (
 						</Popconfirm>
 					</Col>
 					<Col>
-						<Dropdown menu={items}>
+						<Dropdown
+							menu={{
+								items: [
+									{
+										label: status === 'active' ? 'Deactivate' : 'Activate',
+										key: '1',
+										onClick: () => onChangeStatus({ status, id }),
+									},
+									{
+										label: 'Change Password',
+										key: '2',
+										onClick: () => onOpenModal!('password', id),
+									},
+								],
+							}}>
 							<Button className="button-black">
 								<Space>
 									Actions

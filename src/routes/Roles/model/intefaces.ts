@@ -1,6 +1,7 @@
 import { FormInstance } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { Metadata, Role } from '../../../api/interfaces';
+import { ModalType } from '../../Admins/usecase/useModalReducer';
 
 export interface TableRolesI {
 	columns: ColumnsType<any>;
@@ -17,19 +18,19 @@ export interface TableRolesI {
 
 export interface ModalReducerReturnI {
 	modalState?: ModalState;
-	openModal?: (modalType: 'edit' | 'add', id?: string) => void;
+	openModal?: (modalType: ModalType, id?: string) => void;
 	closeModal?: () => void;
 }
 
 export type ModalState = {
 	isOpen: boolean;
-	type: 'edit' | 'add';
+	type: ModalType;
 	queryRoutes?: string;
 	id?: string;
 };
 
 export type Action =
-	| { type: 'OPEN_MODAL'; modalType: 'edit' | 'add'; id?: string }
+	| { type: 'OPEN_MODAL'; modalType: ModalType; id?: string }
 	| { type: 'CLOSE_MODAL' };
 
 export interface RootFormCreateRoleI {
@@ -49,7 +50,7 @@ export interface MenuItem {
 }
 
 export interface AddModalI extends ModalReducerReturnI {
-	openModal?: (modalType: 'edit' | 'add') => void;
+	openModal?: (modalType: ModalType) => void;
 	submitModal: (value: RootFormCreateRoleI) => void;
 	form: FormInstance<any>;
 	menuList?: MenuItem[];
