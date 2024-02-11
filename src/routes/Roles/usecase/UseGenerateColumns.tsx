@@ -1,8 +1,9 @@
 import { Button, Col, Popconfirm, Row, TableProps, Tag } from 'antd';
 import { Permission } from '../../../api/interfaces';
+import { ModalTypeT } from '../../Admins/usecase/useModalReducer';
 
 const UseGenerateColumns = (
-	onOpenModal?: (modalType: 'edit' | 'add', id?: string | undefined) => void,
+	onOpenModal?: (modalType: ModalTypeT, id?: string | undefined) => void,
 	onDelete?: any
 ) => {
 	const columns: TableProps<any>['columns'] = [
